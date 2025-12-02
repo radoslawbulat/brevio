@@ -1,0 +1,85 @@
+.marquee {
+  padding: var(--space-12) 0;
+  overflow: hidden;
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.track {
+  display: flex;
+  width: fit-content;
+  animation: scroll 30s linear infinite;
+}
+
+.track.reverse {
+  animation-name: scroll-reverse;
+}
+
+.track.paused {
+  animation-play-state: paused;
+}
+
+/* Speed variants */
+.slow {
+  animation-duration: 50s;
+}
+
+.normal {
+  animation-duration: 30s;
+}
+
+.fast {
+  animation-duration: 15s;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  padding: 0 var(--space-5);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  white-space: nowrap;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.text {
+  font-size: 14px;
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

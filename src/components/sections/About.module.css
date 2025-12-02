@@ -1,0 +1,160 @@
+.about {
+  padding: var(--space-20) 0;
+  background: linear-gradient(180deg, var(--color-background) 0%, #FAFBFC 100%);
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.label {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-12);
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Chart Cards */
+.charts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.chartCard {
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: var(--space-5);
+  text-align: left;
+}
+
+.chartHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.chartIcon {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.chartTitle {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-medium);
+}
+
+.chartValue {
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.chartPeriod {
+  font-size: 13px;
+  font-weight: var(--font-regular);
+  color: var(--color-text-secondary);
+}
+
+.chartChange {
+  font-size: 13px;
+  font-weight: var(--font-semibold);
+  color: #22C55E;
+}
+
+.chartArea {
+  position: relative;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.chartLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+  padding: 0 var(--space-1);
+}
+
+.chartLabels span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+@media (min-width: 800px) {
+  .about {
+    padding: var(--space-24) 0;
+  }
+
+  .content {
+    max-width: 1000px;
+  }
+
+  .charts {
+    flex-direction: row;
+    gap: var(--space-6);
+  }
+
+  .chartCard {
+    flex: 1;
+    padding: var(--space-6);
+  }
+
+  .chartValue {
+    font-size: 28px;
+  }
+
+  .chartSvg {
+    height: 80px;
+  }
+}
+
+@media (min-width: 1238px) {
+  .about {
+    padding: var(--space-32) 0;
+  }
+}

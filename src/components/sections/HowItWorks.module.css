@@ -1,0 +1,144 @@
+.howItWorks {
+  padding: var(--space-16) 0;
+  background: white;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: var(--font-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.feature {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.featureNumber {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: var(--color-text-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-bold);
+  font-size: 18px;
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTitle {
+  font-size: 18px;
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.featureDesc {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.screenshotWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 800px) {
+  .howItWorks {
+    padding: var(--space-20) 0;
+  }
+
+  .header {
+    margin-bottom: var(--space-16);
+  }
+
+  .content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .features {
+    gap: var(--space-8);
+  }
+
+  .featureNumber {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    font-size: 20px;
+  }
+
+  .featureTitle {
+    font-size: 20px;
+  }
+
+  .featureDesc {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1238px) {
+  .howItWorks {
+    padding: var(--space-24) 0;
+  }
+}
