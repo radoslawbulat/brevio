@@ -13,8 +13,8 @@ export function Pricing() {
     'Pozycjonowanie na frazy lokalne',
     'Optymalizacja Google Moja Firma',
     'Zarządzanie opiniami Google',
-    '2 artykuły blogowe miesięcznie',
-    'Posty na social media (8/msc)',
+    'Artykuły blogowe bez limitu',
+    'Posty na social media bez limitu',
     'Raport miesięczny z wynikami',
   ]
 

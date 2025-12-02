@@ -11,7 +11,7 @@ export function HowItWorks() {
         <div className={`${styles.header} ${isVisible ? styles.visible : ''}`}>
           <h2 className={styles.title}>Jak to działa?</h2>
           <p className={styles.subtitle}>
-            Jedna platforma. Cały marketing. Ty zajmujesz się klientami — my zajmujemy się Twoim wzrostem.
+            Jedna platforma. Cały marketing. Ty zajmujesz się klientami — my zajmujemy się wzrostem Twojego biznesu.
           </p>
         </div>
 

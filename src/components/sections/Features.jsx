@@ -39,7 +39,7 @@ const features = [
   },
   {
     id: 'content',
-    title: 'Treści na blog',
+    title: 'Treści na bloga',
     description: 'Artykuły które odpowiadają na pytania Twoich potencjalnych klientów. Budują autorytet i pozycję w Google jednocześnie.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
