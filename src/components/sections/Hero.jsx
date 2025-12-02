@@ -49,8 +49,8 @@ export function Hero() {
             </div>
             <div className={styles.proofDivider}></div>
             <div className={styles.proofItem}>
-              <span className={styles.proofNumber}>Top 3</span>
-              <span className={styles.proofLabel}>Google Maps & AI Overview</span>
+              <span className={styles.proofNumber}>Ekskluzywność</span>
+              <span className={styles.proofLabel}>limitowana liczba kancelarii</span>
             </div>
           </div>
         </div>
