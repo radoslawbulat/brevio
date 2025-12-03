@@ -27,7 +27,7 @@ export function Hero() {
           </h1>
           <p className={styles.subheadline}>
             Platforma do marketingu kancelarii. SEO, strona, mapy, treści, social media.
-            <strong> Stała opłata. Zgodne z zasadami etyki zawodowej.</strong>
+            <strong> Stała opłata. Zgodna z zasadami etyki zawodowej.</strong>
           </p>
           <div className={styles.actions}>
             <Button variant="primary" size="large" onClick={openModal}>

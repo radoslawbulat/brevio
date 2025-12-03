@@ -111,11 +111,11 @@ export function Pricing() {
             </div>
             <div className={styles.faqItem}>
               <h4>Kiedy zobaczę efekty?</h4>
-              <p>SEO to maraton, nie sprint. Pierwsze efekty po 2-3 miesiącach, pełne rezultaty po 6 miesiącach.</p>
+              <p>Pierwsze wzrosty widoczności po 4-6 tygodniach. Znaczący wzrost zapytań po 3-4 miesiącach.</p>
             </div>
             <div className={styles.faqItem}>
               <h4>Czy pracujecie z konkurencją?</h4>
-              <p>Nie. W danym mieście współpracujemy tylko z jedną kancelarią w danej specjalizacji.</p>
+              <p>Nigdy. Jedna specjalizacja, limitowana liczba kancelarii. Twój sukces to nasz sukces.</p>
             </div>
             <div className={styles.faqItem}>
               <h4>Co jeśli mam już stronę?</h4>
