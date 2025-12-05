@@ -4,35 +4,43 @@ import styles from './ServicePageElegant.module.css'
 
 export default function ServicePageElegant({ lawyer, service, lawyerSlug }) {
   useEffect(() => {
-    const reveals = document.querySelectorAll(`.${styles.reveal}`)
+    // Reveal on scroll using Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.active)
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
 
-    const revealOnScroll = () => {
-      reveals.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top
-        const windowHeight = window.innerHeight
+    // Use setTimeout to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      const reveals = document.querySelectorAll(`.${styles.reveal}`)
+      reveals.forEach(element => observer.observe(element))
+    }, 100)
 
-        if (elementTop < windowHeight - 100) {
-          element.classList.add(styles.active)
-        }
-      })
+    return () => {
+      clearTimeout(timer)
+      observer.disconnect()
     }
-
-    window.addEventListener('scroll', revealOnScroll)
-    revealOnScroll()
-
-    return () => window.removeEventListener('scroll', revealOnScroll)
   }, [])
 
   const initials = lawyer.name.split(' ').map(n => n[0]).join('')
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-lawyer-template="elegant">
       {/* Navigation */}
       <nav className={styles.nav}>
-        <Link to={`/${lawyerSlug}?t=elegant`} className={styles.logo}>{lawyer.name}</Link>
+        <Link to={`/${lawyerSlug}`} className={styles.logo}>{lawyer.name}</Link>
         <ul className={styles.navLinks}>
-          <li><Link to={`/${lawyerSlug}?t=elegant#uslugi`}>Usługi</Link></li>
-          <li><Link to={`/${lawyerSlug}?t=elegant#omnie`}>O mnie</Link></li>
+          <li><Link to={`/${lawyerSlug}#uslugi`}>Usługi</Link></li>
+          <li><Link to={`/${lawyerSlug}#omnie`}>O mnie</Link></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
         <a href="#kontakt" className={styles.navContact}>Umów wizytę</a>
@@ -41,7 +49,7 @@ export default function ServicePageElegant({ lawyer, service, lawyerSlug }) {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <Link to={`/${lawyerSlug}?t=elegant`} className={styles.backLink}>
+          <Link to={`/${lawyerSlug}`} className={styles.backLink}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
@@ -119,7 +127,7 @@ export default function ServicePageElegant({ lawyer, service, lawyerSlug }) {
           ].filter(s => s.id !== service.id).map((s) => (
             <Link
               key={s.id}
-              to={`/${lawyerSlug}/uslugi/${s.id}?t=elegant`}
+              to={`/${lawyerSlug}/uslugi/${s.id}`}
               className={`${styles.otherCard} ${styles.reveal}`}
             >
               <span className={styles.otherIcon}>{s.icon}</span>
@@ -220,9 +228,9 @@ export default function ServicePageElegant({ lawyer, service, lawyerSlug }) {
         <div className={styles.footerContent}>
           <span className={styles.footerLogo}>{lawyer.title} {lawyer.name}</span>
           <ul className={styles.footerLinks}>
-            <li><Link to={`/${lawyerSlug}?t=elegant#uslugi`}>Usługi</Link></li>
-            <li><Link to={`/${lawyerSlug}?t=elegant#omnie`}>O mnie</Link></li>
-            <li><Link to={`/${lawyerSlug}?t=elegant#kontakt`}>Kontakt</Link></li>
+            <li><Link to={`/${lawyerSlug}#uslugi`}>Usługi</Link></li>
+            <li><Link to={`/${lawyerSlug}#omnie`}>O mnie</Link></li>
+            <li><Link to={`/${lawyerSlug}#kontakt`}>Kontakt</Link></li>
           </ul>
           <span className={styles.footerCopy}>
             © {new Date().getFullYear()} Kancelaria {lawyer.title}a {lawyer.name}
@@ -230,13 +238,9 @@ export default function ServicePageElegant({ lawyer, service, lawyerSlug }) {
         </div>
       </footer>
 
-      {/* Brevio badge */}
-      <div className={styles.brevioBadge}>
-        Strona stworzona przez <a href="https://brevio.pl" target="_blank" rel="noopener noreferrer">Brevio</a>
-      </div>
+      {/* Spacer for bottom customizer bar */}
+      <div style={{ height: '60px' }}></div>
 
-      {/* Spacer for template switcher */}
-      <div style={{ height: '80px' }}></div>
     </div>
   )
 }

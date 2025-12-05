@@ -7,6 +7,8 @@
   --color-accent: #8b7355;
   --color-accent-light: #c4b49a;
   --color-muted: #6b6b6b;
+  --color-dark: #1a1a1a;
+  --color-light: #f8f6f3;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
 
@@ -401,8 +403,8 @@
 /* About Section */
 .about {
   padding: 8rem 0;
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-dark);
+  color: var(--color-light);
 }
 
 .aboutContainer {
@@ -754,42 +756,158 @@
 
 /* Footer */
 .footer {
-  padding: 4rem 8rem;
-  background: var(--color-ink);
-  color: var(--color-paper);
+  padding: 5rem 8rem 2rem;
+  background: var(--color-dark);
+  color: var(--color-light);
 }
 
-.footerContent {
+.footerMain {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerBrand {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .footerLogo {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.footerTagline {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.footerCredentials {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-accent-light);
+  margin-top: 0.5rem;
+}
+
+.footerDot {
+  opacity: 0.5;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerHeading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: var(--color-light);
 }
 
 .footerLinks {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.75rem;
   list-style: none;
 }
 
 .footerLinks a {
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   transition: color 0.3s ease;
 }
 
 .footerLinks a:hover {
-  color: var(--color-paper);
+  color: var(--color-accent-light);
+}
+
+.footerContact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+}
+
+.footerContact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.footerContact svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  stroke: var(--color-accent-light);
+}
+
+.footerContact a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerContact a:hover {
+  color: var(--color-accent-light);
+}
+
+.footerHours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.footerHours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footerHours li span:last-child {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
 }
 
 .footerCopy {
   color: rgba(255, 255, 255, 0.4);
   font-size: 0.8rem;
+}
+
+.footerLegal {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerLegal a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.footerLegal a:hover {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Brevio Badge */
@@ -878,18 +996,52 @@
 @media (max-width: 968px) {
   .hero {
     grid-template-columns: 1fr;
+    position: relative;
   }
 
   .heroVisual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .heroVisual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-paper) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-paper) 85%, transparent) 50%,
+      var(--color-paper) 100%
+    );
+    z-index: 1;
+  }
+
+  .heroImageContainer {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    animation: none;
+  }
+
+  .heroImage {
+    object-position: center center;
+  }
+
+  .heroDecoration {
     display: none;
   }
 
   .heroContent {
+    position: relative;
+    z-index: 2;
     padding: 10rem 2rem 4rem;
   }
 
   .scrollIndicator {
     left: 2rem;
+    z-index: 2;
   }
 
   .nav {
@@ -940,13 +1092,36 @@
   }
 
   .footer {
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
   }
 
-  .footerContent {
-    flex-direction: column;
-    gap: 1.5rem;
+  .footerMain {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footerBrand {
+    grid-column: 1 / -1;
     text-align: center;
+    align-items: center;
+  }
+
+  .footerTagline {
+    text-align: center;
+  }
+
+  .footerCredentials {
+    justify-content: center;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footerLegal {
+    justify-content: center;
   }
 
   .heroCta {
@@ -962,6 +1137,25 @@
 
   .credentialValue {
     font-size: 1.5rem;
+  }
+
+  .footerMain {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footerColumn {
+    text-align: center;
+  }
+
+  .footerContact li {
+    justify-content: center;
+  }
+
+  .footerHours li {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
   }
 
   .brevioBadge {

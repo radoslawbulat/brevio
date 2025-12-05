@@ -1,0 +1,276 @@
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  color: white;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggleBtn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggleBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lawyerName {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Color Section */
+.colorSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.colorLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.colorPicker {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.colorBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.colorBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.colorBtn.active {
+  border-color: var(--theme-accent, #8b7355);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.colorPreview {
+  display: flex;
+  gap: 4px;
+}
+
+.colorDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.colorName {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.heroPreview {
+  width: 40px;
+  height: 28px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.heroPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CTA */
+.cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.ctaText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ctaBtn {
+  background: linear-gradient(135deg, #c4a77d 0%, #8b7355 100%);
+  color: white;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(196, 167, 125, 0.4);
+}
+
+.ctaBtn svg {
+  transition: transform 0.2s ease;
+}
+
+.ctaBtn:hover svg {
+  transform: translateX(3px);
+}
+
+/* Expanded state */
+.bar.expanded {
+  padding-bottom: 0.5rem;
+}
+
+.bar.expanded .content {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem 2rem;
+}
+
+.bar.expanded .mainContent {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.bar.expanded .info {
+  justify-content: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar.expanded .colorSection {
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar.expanded .colorPicker {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bar.expanded .cta {
+  justify-content: center;
+  margin-left: 0;
+  padding-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .content {
+    padding: 0.75rem 1rem;
+  }
+
+  .mainContent {
+    gap: 1rem;
+  }
+
+  .colorSection {
+    display: none;
+  }
+
+  .bar.expanded .colorSection {
+    display: flex;
+  }
+
+  .ctaText {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .lawyerName {
+    font-size: 0.85rem;
+  }
+
+  .colorBtn {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .colorDot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .colorName {
+    font-size: 0.65rem;
+  }
+
+  .ctaBtn {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}

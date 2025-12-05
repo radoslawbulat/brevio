@@ -1,21 +1,14 @@
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useLawyer from '../hooks/useLawyer'
 import { getServiceById } from '../data/services'
 import PasswordGate from '../components/lawyer/PasswordGate'
-import TemplateSwitcher from '../components/lawyer/TemplateSwitcher'
 import ServicePageElegant from '../components/lawyer/templates/ServicePageElegant'
+import CustomizerBar from '../components/lawyer/CustomizerBar'
 
 function ServicePage() {
   const { lawyerSlug, serviceId } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
   const lawyer = useLawyer(lawyerSlug)
   const service = getServiceById(serviceId)
-
-  const currentTemplate = searchParams.get('t') || 'elegant'
-
-  const setTemplate = (templateId) => {
-    setSearchParams({ t: templateId })
-  }
 
   if (!lawyer) {
     return (
@@ -51,8 +44,6 @@ function ServicePage() {
     )
   }
 
-  // For now, only elegant template has service pages
-  // Other templates will redirect to main page
   return (
     <PasswordGate>
       <ServicePageElegant
@@ -60,11 +51,7 @@ function ServicePage() {
         service={service}
         lawyerSlug={lawyerSlug}
       />
-      <TemplateSwitcher
-        currentTemplate={currentTemplate}
-        onTemplateChange={setTemplate}
-        lawyerName={lawyer.name}
-      />
+      <CustomizerBar lawyerName={lawyer.name} />
     </PasswordGate>
   )
 }

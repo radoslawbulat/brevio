@@ -7,6 +7,8 @@
   --color-accent: #8b7355;
   --color-accent-light: #c4b49a;
   --color-muted: #6b6b6b;
+  --color-dark: #1a1a1a;
+  --color-light: #f8f6f3;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
 
@@ -711,8 +713,8 @@
 /* Footer */
 .footer {
   padding: 4rem 8rem;
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-dark);
+  color: var(--color-light);
 }
 
 .footerContent {

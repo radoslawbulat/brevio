@@ -7,31 +7,38 @@ export default function TemplateElegant({ lawyer }) {
   const { lawyerSlug } = useParams()
 
   useEffect(() => {
-    // Reveal on scroll
-    const reveals = document.querySelectorAll(`.${styles.reveal}`)
+    // Reveal on scroll using Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.active)
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
 
-    const revealOnScroll = () => {
-      reveals.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top
-        const windowHeight = window.innerHeight
+    // Use setTimeout to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      const reveals = document.querySelectorAll(`.${styles.reveal}`)
+      reveals.forEach(element => observer.observe(element))
+    }, 100)
 
-        if (elementTop < windowHeight - 100) {
-          element.classList.add(styles.active)
-        }
-      })
+    return () => {
+      clearTimeout(timer)
+      observer.disconnect()
     }
-
-    window.addEventListener('scroll', revealOnScroll)
-    revealOnScroll() // Initial check
-
-    return () => window.removeEventListener('scroll', revealOnScroll)
   }, [])
 
   const initials = lawyer.name.split(' ').map(n => n[0]).join('')
   const firstName = lawyer.name.split(' ')[0]
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-lawyer-template="elegant">
       {/* Navigation */}
       <nav className={styles.nav}>
         <a href="#top" className={styles.logo}>{lawyer.name}</a>
@@ -71,7 +78,7 @@ export default function TemplateElegant({ lawyer }) {
         </div>
         <div className={styles.heroVisual}>
           <div className={styles.heroImageContainer}>
-            <img src="/hero.jpg" alt={lawyer.name} className={styles.heroImage} />
+            <img src="/hero.jpg" alt={lawyer.name} className={styles.heroImage} data-hero-image />
           </div>
           <div className={styles.heroDecoration}></div>
         </div>
@@ -94,7 +101,7 @@ export default function TemplateElegant({ lawyer }) {
           {SERVICES.map((service) => (
             <Link
               key={service.id}
-              to={`/${lawyerSlug}/uslugi/${service.id}?t=elegant`}
+              to={`/${lawyerSlug}/uslugi/${service.id}`}
               className={`${styles.serviceCard} ${styles.reveal}`}
             >
               <span className={styles.serviceNumber}>{service.num}</span>
@@ -278,26 +285,79 @@ export default function TemplateElegant({ lawyer }) {
 
       {/* Footer */}
       <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <span className={styles.footerLogo}>{lawyer.title} {lawyer.name}</span>
-          <ul className={styles.footerLinks}>
-            <li><a href="#uslugi">Usługi</a></li>
-            <li><a href="#omnie">O mnie</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
+        <div className={styles.footerMain}>
+          <div className={styles.footerBrand}>
+            <span className={styles.footerLogo}>{lawyer.title} {lawyer.name}</span>
+            <p className={styles.footerTagline}>
+              Profesjonalna pomoc prawna dla klientów indywidualnych i biznesowych.
+            </p>
+            <div className={styles.footerCredentials}>
+              <span>Izba Adwokacka</span>
+              <span className={styles.footerDot}>•</span>
+              <span>Nr wpisu: {lawyer.registrationNumber}</span>
+            </div>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <h4 className={styles.footerHeading}>Usługi</h4>
+            <ul className={styles.footerLinks}>
+              <li><a href="#uslugi">Prawo cywilne</a></li>
+              <li><a href="#uslugi">Prawo rodzinne</a></li>
+              <li><a href="#uslugi">Prawo gospodarcze</a></li>
+              <li><a href="#uslugi">Prawo pracy</a></li>
+            </ul>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <h4 className={styles.footerHeading}>Kontakt</h4>
+            <ul className={styles.footerContact}>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <a href={`tel:${lawyer.phone.replace(/\s/g, '')}`}>{lawyer.phone}</a>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <a href={`mailto:${lawyer.email}`}>{lawyer.email}</a>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>{lawyer.address}, {lawyer.city}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.footerColumn}>
+            <h4 className={styles.footerHeading}>Godziny</h4>
+            <ul className={styles.footerHours}>
+              <li><span>Poniedziałek - Piątek</span><span>9:00 - 17:00</span></li>
+              <li><span>Sobota</span><span>Po umówieniu</span></li>
+              <li><span>Niedziela</span><span>Zamknięte</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.footerBottom}>
           <span className={styles.footerCopy}>
-            © {new Date().getFullYear()} Kancelaria {lawyer.title}a {lawyer.name}
+            © {new Date().getFullYear()} Kancelaria {lawyer.title}a {lawyer.name}. Wszelkie prawa zastrzeżone.
           </span>
+          <div className={styles.footerLegal}>
+            <a href="#kontakt">Polityka prywatności</a>
+            <a href="#kontakt">Regulamin</a>
+          </div>
         </div>
       </footer>
 
-      {/* Brevio badge */}
-      <div className={styles.brevioBadge}>
-        Strona stworzona przez <a href="https://brevio.pl" target="_blank" rel="noopener noreferrer">Brevio</a>
-      </div>
+      {/* Spacer for bottom customizer bar */}
+      <div style={{ height: '60px' }}></div>
 
-      {/* Spacer for template switcher */}
-      <div style={{ height: '80px' }}></div>
     </div>
   )
 }

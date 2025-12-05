@@ -1,30 +1,12 @@
-import { useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useLawyer from '../hooks/useLawyer'
 import PasswordGate from '../components/lawyer/PasswordGate'
-import TemplateSwitcher from '../components/lawyer/TemplateSwitcher'
-import TemplateClassic from '../components/lawyer/templates/TemplateClassic'
-import TemplateModern from '../components/lawyer/templates/TemplateModern'
-import TemplateBold from '../components/lawyer/templates/TemplateBold'
 import TemplateElegant from '../components/lawyer/templates/TemplateElegant'
-
-const TEMPLATES = {
-  elegant: TemplateElegant,
-  classic: TemplateClassic,
-  modern: TemplateModern,
-  bold: TemplateBold,
-}
+import CustomizerBar from '../components/lawyer/CustomizerBar'
 
 function LawyerPage() {
   const { lawyerSlug } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
   const lawyer = useLawyer(lawyerSlug)
-
-  const currentTemplate = searchParams.get('t') || 'elegant'
-
-  const setTemplate = (templateId) => {
-    setSearchParams({ t: templateId })
-  }
 
   if (!lawyer) {
     return (
@@ -43,16 +25,10 @@ function LawyerPage() {
     )
   }
 
-  const TemplateComponent = TEMPLATES[currentTemplate] || TemplateElegant
-
   return (
     <PasswordGate>
-      <TemplateComponent lawyer={lawyer} />
-      <TemplateSwitcher
-        currentTemplate={currentTemplate}
-        onTemplateChange={setTemplate}
-        lawyerName={lawyer.name}
-      />
+      <TemplateElegant lawyer={lawyer} />
+      <CustomizerBar lawyerName={lawyer.name} />
     </PasswordGate>
   )
 }
