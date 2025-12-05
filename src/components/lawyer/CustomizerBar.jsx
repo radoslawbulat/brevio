@@ -53,6 +53,7 @@ export default function CustomizerBar({ lawyerName }) {
   const [activeTheme, setActiveTheme] = useState('elegant')
   const [activeHero, setActiveHero] = useState('hero')
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const applyHeroImage = (heroImage) => {
@@ -83,21 +84,49 @@ export default function CustomizerBar({ lawyerName }) {
   }
 
   return (
-    <div className={`${styles.bar} ${isExpanded ? styles.expanded : ''}`}>
-      <div className={styles.content}>
+    <>
+      {/* Collapsed state - floating button */}
+      {isCollapsed && (
         <button
-          className={styles.toggleBtn}
-          onClick={() => setIsExpanded(!isExpanded)}
-          aria-label={isExpanded ? 'Zwiń' : 'Rozwiń'}
+          className={styles.floatingBtn}
+          onClick={() => setIsCollapsed(false)}
+          aria-label="Pokaż pasek"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {isExpanded ? (
-              <path d="M6 9l6 6 6-6"/>
-            ) : (
-              <path d="M18 15l-6-6-6 6"/>
-            )}
+            <path d="M12 19V5M5 12l7-7 7 7"/>
           </svg>
+          <span>Podgląd</span>
         </button>
+      )}
+
+      {/* Full bar */}
+      <div className={`${styles.bar} ${isExpanded ? styles.expanded : ''} ${isCollapsed ? styles.collapsed : ''}`}>
+        <div className={styles.content}>
+          {/* Collapse button (hide bar) */}
+          <button
+            className={styles.collapseBtn}
+            onClick={() => setIsCollapsed(true)}
+            aria-label="Schowaj pasek"
+            title="Schowaj pasek"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </button>
+
+          <button
+            className={styles.toggleBtn}
+            onClick={() => setIsExpanded(!isExpanded)}
+            aria-label={isExpanded ? 'Zwiń' : 'Rozwiń'}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {isExpanded ? (
+                <path d="M6 9l6 6 6-6"/>
+              ) : (
+                <path d="M18 15l-6-6-6 6"/>
+              )}
+            </svg>
+          </button>
 
         <div className={styles.mainContent}>
           <div className={styles.info}>
@@ -163,11 +192,13 @@ export default function CustomizerBar({ lawyerName }) {
         </div>
       </div>
 
+      </div>
+
       <DownloadModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         lawyerName={lawyerName}
       />
-    </div>
+    </>
   )
 }
