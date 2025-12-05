@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './CustomizerBar.module.css'
+import DownloadModal from './DownloadModal'
 
 const HERO_IMAGES = [
   { id: 'hero', name: 'Portret', src: '/hero.jpg' },
@@ -52,6 +53,7 @@ export default function CustomizerBar({ lawyerName }) {
   const [activeTheme, setActiveTheme] = useState('elegant')
   const [activeHero, setActiveHero] = useState('hero')
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const applyHeroImage = (heroImage) => {
     const heroImg = document.querySelector('[data-hero-image]')
@@ -77,7 +79,7 @@ export default function CustomizerBar({ lawyerName }) {
   }
 
   const handleDownload = () => {
-    window.open('https://brevio.pl/#pricing', '_blank')
+    setIsModalOpen(true)
   }
 
   return (
@@ -103,57 +105,56 @@ export default function CustomizerBar({ lawyerName }) {
             <span className={styles.lawyerName}>{lawyerName}</span>
           </div>
 
-          {isExpanded && (
-            <>
-              <div className={styles.colorSection}>
-                <span className={styles.colorLabel}>Kolorystyka:</span>
-                <div className={styles.colorPicker}>
-                  {COLOR_THEMES.map((theme) => (
-                    <button
-                      key={theme.id}
-                      className={`${styles.colorBtn} ${activeTheme === theme.id ? styles.active : ''}`}
-                      onClick={() => applyTheme(theme)}
-                      title={theme.name}
-                      style={{
-                        '--theme-ink': theme.colors.ink,
-                        '--theme-accent': theme.colors.accent,
-                      }}
-                    >
-                      <span className={styles.colorPreview}>
-                        <span className={styles.colorDot} style={{ background: theme.colors.paper }}></span>
-                        <span className={styles.colorDot} style={{ background: theme.colors.accent }}></span>
-                      </span>
-                      <span className={styles.colorName}>{theme.name}</span>
-                    </button>
-                  ))}
-                </div>
+          {/* Desktop: always visible, Mobile: toggle controlled */}
+          <div className={`${styles.pickers} ${isExpanded ? styles.pickersExpanded : ''}`}>
+            <div className={styles.colorSection}>
+              <span className={styles.colorLabel}>Kolorystyka:</span>
+              <div className={styles.colorPicker}>
+                {COLOR_THEMES.map((theme) => (
+                  <button
+                    key={theme.id}
+                    className={`${styles.colorBtn} ${activeTheme === theme.id ? styles.active : ''}`}
+                    onClick={() => applyTheme(theme)}
+                    title={theme.name}
+                    style={{
+                      '--theme-ink': theme.colors.ink,
+                      '--theme-accent': theme.colors.accent,
+                    }}
+                  >
+                    <span className={styles.colorPreview}>
+                      <span className={styles.colorDot} style={{ background: theme.colors.paper }}></span>
+                      <span className={styles.colorDot} style={{ background: theme.colors.accent }}></span>
+                    </span>
+                    <span className={styles.colorName}>{theme.name}</span>
+                  </button>
+                ))}
               </div>
+            </div>
 
-              <div className={styles.colorSection}>
-                <span className={styles.colorLabel}>Zdjęcie:</span>
-                <div className={styles.colorPicker}>
-                  {HERO_IMAGES.map((hero) => (
-                    <button
-                      key={hero.id}
-                      className={`${styles.colorBtn} ${activeHero === hero.id ? styles.active : ''}`}
-                      onClick={() => applyHeroImage(hero)}
-                      title={hero.name}
-                    >
-                      <span className={styles.heroPreview}>
-                        <img src={hero.src} alt={hero.name} />
-                      </span>
-                      <span className={styles.colorName}>{hero.name}</span>
-                    </button>
-                  ))}
-                </div>
+            <div className={styles.colorSection}>
+              <span className={styles.colorLabel}>Zdjęcie:</span>
+              <div className={styles.colorPicker}>
+                {HERO_IMAGES.map((hero) => (
+                  <button
+                    key={hero.id}
+                    className={`${styles.colorBtn} ${activeHero === hero.id ? styles.active : ''}`}
+                    onClick={() => applyHeroImage(hero)}
+                    title={hero.name}
+                  >
+                    <span className={styles.heroPreview}>
+                      <img src={hero.src} alt={hero.name} />
+                    </span>
+                    <span className={styles.colorName}>{hero.name}</span>
+                  </button>
+                ))}
               </div>
-            </>
-          )}
+            </div>
+          </div>
 
           <div className={styles.cta}>
-            <span className={styles.ctaText}>Chcesz taką stronę?</span>
+            <span className={styles.ctaText}>Chcesz tą stronę?</span>
             <button className={styles.ctaBtn} onClick={handleDownload}>
-              Zamów teraz
+              Pobierz
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -161,6 +162,11 @@ export default function CustomizerBar({ lawyerName }) {
           </div>
         </div>
       </div>
+
+      <DownloadModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
