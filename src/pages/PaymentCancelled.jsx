@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import styles from './PaymentResult.module.css'
 
 export default function PaymentCancelled() {
+  const [searchParams] = useSearchParams()
+  const returnUrl = searchParams.get('return') || '/'
+
   return (
     <div className={styles.page}>
       <div className={styles.card}>
@@ -26,8 +29,8 @@ export default function PaymentCancelled() {
         </div>
 
         <div className={styles.actions}>
-          <Link to="/" className={styles.btnPrimary}>
-            Wróć na stronę główną
+          <Link to={returnUrl} className={styles.btnPrimary}>
+            Wróć do strony
           </Link>
           <a
             href="https://cal.com/vencer/30min"

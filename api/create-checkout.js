@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount, lawyerName } = req.body
+    const { amount, lawyerName, returnUrl } = req.body
 
     // Validate amount
     if (!amount || amount < 50) {
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       ],
       mode: 'payment',
       success_url: `${req.headers.origin || 'https://brevio.pl'}/sukces?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin || 'https://brevio.pl'}/anulowano`,
+      cancel_url: `${req.headers.origin || 'https://brevio.pl'}/anulowano?return=${encodeURIComponent(returnUrl || '/')}`,
       metadata: {
         lawyerName,
         amount: amount.toString(),

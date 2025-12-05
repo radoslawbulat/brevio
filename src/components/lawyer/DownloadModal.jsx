@@ -44,7 +44,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
         const response = await fetch('/api/create-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount, lawyerName }),
+          body: JSON.stringify({ amount, lawyerName, returnUrl: window.location.pathname }),
         })
         const data = await response.json()
 
