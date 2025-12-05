@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import styles from './DownloadModal.module.css'
+import { generateWebsiteZip } from '../../utils/generateWebsite'
 
 const SUGGESTED_AMOUNT = 1999
 
-export default function DownloadModal({ isOpen, onClose }) {
+export default function DownloadModal({ isOpen, onClose, lawyerName }) {
   const [amount, setAmount] = useState(0)
+  const [isGenerating, setIsGenerating] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -23,16 +25,23 @@ export default function DownloadModal({ isOpen, onClose }) {
     }
   }
 
-  const handleDownload = () => {
-    // For now, just close modal - can integrate payment later
+  const handleDownload = async () => {
     if (amount === 0) {
-      // Free download
-      alert('Dziękujemy! Link do pobrania zostanie wysłany na email.')
+      // Free download - generate ZIP
+      setIsGenerating(true)
+      try {
+        await generateWebsiteZip(lawyerName)
+      } catch (error) {
+        console.error('Error generating website:', error)
+        alert('Wystąpił błąd podczas generowania strony. Spróbuj ponownie.')
+      }
+      setIsGenerating(false)
+      onClose()
     } else {
-      // Paid - redirect to payment
-      window.open(`https://brevio.pl/checkout?amount=${amount}`, '_blank')
+      // Paid - redirect to payment/contact
+      window.open('https://cal.com/vencer/30min', '_blank')
+      onClose()
     }
-    onClose()
   }
 
   const handleScheduleCall = () => {
@@ -99,8 +108,14 @@ export default function DownloadModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <button className={styles.downloadBtn} onClick={handleDownload}>
-          {amount === 0 ? (
+        <button
+          className={styles.downloadBtn}
+          onClick={handleDownload}
+          disabled={isGenerating}
+        >
+          {isGenerating ? (
+            'Generowanie...'
+          ) : amount === 0 ? (
             <>
               Pobierz za darmo
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

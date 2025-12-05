@@ -166,6 +166,7 @@ export default function CustomizerBar({ lawyerName }) {
       <DownloadModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        lawyerName={lawyerName}
       />
     </div>
   )
