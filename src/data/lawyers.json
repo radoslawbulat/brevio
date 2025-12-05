@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "adwokat-zurek-jakub",
+    "name": "Jakub Żurek",
+    "title": "Adwokat",
+    "registrationNumber": "WRO/Adw/644",
+    "phone": "609 407 942",
+    "email": "j.zurek@kancelaria.pl",
+    "website": "https://kancelaria-zurek.pl",
+    "address": "al. gen. Józefa Hallera 4/1",
+    "postalCode": "53-318",
+    "city": "Wrocław",
+    "languages": ["angielski", "niemiecki"],
+    "statusCode": "KI"
+  },
+  {
+    "slug": "adwokat-kowalska-anna",
+    "name": "Anna Kowalska",
+    "title": "Adwokat",
+    "registrationNumber": "WRO/Adw/1205",
+    "phone": "512 345 678",
+    "email": "a.kowalska@prawo.pl",
+    "website": "",
+    "address": "ul. Ruska 15/3",
+    "postalCode": "50-079",
+    "city": "Wrocław",
+    "languages": ["angielski"],
+    "statusCode": "KI"
+  },
+  {
+    "slug": "adwokat-nowak-piotr",
+    "name": "Piotr Nowak",
+    "title": "Adwokat",
+    "registrationNumber": "WRO/Adw/892",
+    "phone": "601 234 567",
+    "email": "piotr.nowak@adwokatura.pl",
+    "website": "https://nowak-kancelaria.pl",
+    "address": "ul. Świdnicka 28/10",
+    "postalCode": "50-068",
+    "city": "Wrocław",
+    "languages": [],
+    "statusCode": "KI"
+  },
+  {
+    "slug": "adwokat-wisniewski-marek",
+    "name": "Marek Wiśniewski",
+    "title": "Adwokat",
+    "registrationNumber": "WRO/Adw/456",
+    "phone": "502 876 543",
+    "email": "m.wisniewski@adwokat.wroclaw.pl",
+    "website": "",
+    "address": "pl. Solny 2/5",
+    "postalCode": "50-060",
+    "city": "Wrocław",
+    "languages": ["angielski", "rosyjski"],
+    "statusCode": "SAD"
+  },
+  {
+    "slug": "adwokat-dabrowska-maria",
+    "name": "Maria Dąbrowska",
+    "title": "Adwokat",
+    "registrationNumber": "WRO/Adw/1567",
+    "phone": "515 987 654",
+    "email": "maria.dabrowska@legal.pl",
+    "website": "https://dabrowska-adwokat.pl",
+    "address": "ul. Kazimierza Wielkiego 5",
+    "postalCode": "50-077",
+    "city": "Wrocław",
+    "languages": ["angielski", "francuski"],
+    "statusCode": "KI"
+  }
+]
