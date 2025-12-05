@@ -1,4 +1,4 @@
-const Stripe = require('stripe')
+import Stripe from 'stripe'
 
 export default async function handler(req, res) {
   // Initialize Stripe inside the handler to ensure env vars are loaded

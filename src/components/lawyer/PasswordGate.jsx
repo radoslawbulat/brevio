@@ -46,9 +46,7 @@ export default function PasswordGate({ children }) {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.logo}>
-          <svg width="120" height="32" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <text x="0" y="24" fontFamily="Manrope, sans-serif" fontSize="24" fontWeight="700" fill="currentColor">brevio</text>
-          </svg>
+          <img src="/brevio.svg" alt="Brevio" height="28" />
         </div>
         <h1 className={styles.title}>Podgląd strony</h1>
         <p className={styles.description}>
