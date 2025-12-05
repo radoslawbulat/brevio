@@ -1,5 +1,5 @@
-import lawyers from '../data/lawyers.json'
+import landingPages from '../data/landing-pages.json'
 
 export default function useLawyer(slug) {
-  return lawyers.find(lawyer => lawyer.slug === slug) || null
+  return landingPages.find(lawyer => lawyer.slug === slug) || null
 }

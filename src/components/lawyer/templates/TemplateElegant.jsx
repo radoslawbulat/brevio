@@ -36,6 +36,9 @@ export default function TemplateElegant({ lawyer }) {
 
   const initials = lawyer.name.split(' ').map(n => n[0]).join('')
   const firstName = lawyer.name.split(' ')[0]
+  const isMan = lawyer.gender === 'man'
+  const heroImage = isMan ? '/heroman.png' : '/hero.png'
+  const aboutImage = isMan ? '/aboutmeman.png' : '/aboutme.png'
 
   return (
     <div className={styles.page} data-lawyer-template="elegant">
@@ -78,7 +81,7 @@ export default function TemplateElegant({ lawyer }) {
         </div>
         <div className={styles.heroVisual}>
           <div className={styles.heroImageContainer}>
-            <img src="/hero.jpg" alt={lawyer.name} className={styles.heroImage} data-hero-image />
+            <img src={heroImage} alt={lawyer.name} className={styles.heroImage} data-hero-image />
           </div>
           <div className={styles.heroDecoration}></div>
         </div>
@@ -122,7 +125,7 @@ export default function TemplateElegant({ lawyer }) {
       <section className={styles.about} id="omnie">
         <div className={styles.aboutContainer}>
           <div className={`${styles.aboutImageWrapper} ${styles.reveal}`}>
-            <img src="/aboutme.png" alt={lawyer.name} className={styles.aboutImage} />
+            <img src={aboutImage} alt={lawyer.name} className={styles.aboutImage} />
             <div className={styles.aboutFrame}></div>
           </div>
           <div className={`${styles.aboutContent} ${styles.reveal}`}>
