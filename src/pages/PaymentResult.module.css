@@ -1,0 +1,158 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f6f3 0%, #e8e4dd 100%);
+  font-family: 'DM Sans', -apple-system, sans-serif;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+.iconSuccess {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #52b788 0%, #40916c 100%);
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.iconCancelled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ef476f 0%, #d62828 100%);
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+}
+
+.message {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.details {
+  background: #f8f6f3;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.details p {
+  margin: 0 0 0.75rem 0;
+  color: #1a1a1a;
+}
+
+.details ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #666;
+}
+
+.details li {
+  margin-bottom: 0.5rem;
+}
+
+.details li:last-child {
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #c4a77d 0%, #8b7355 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(196, 167, 125, 0.4);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #1a1a1a;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  border: 2px solid #e8e4dd;
+  transition: all 0.2s ease;
+}
+
+.btnSecondary:hover {
+  border-color: #c4a77d;
+  background: #faf8f5;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+
+  .iconSuccess,
+  .iconCancelled {
+    width: 80px;
+    height: 80px;
+  }
+
+  .iconSuccess svg,
+  .iconCancelled svg {
+    width: 48px;
+    height: 48px;
+  }
+}

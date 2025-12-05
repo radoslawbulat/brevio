@@ -38,9 +38,26 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
       setIsGenerating(false)
       onClose()
     } else {
-      // Paid - redirect to payment/contact
-      window.open('https://cal.com/vencer/30min', '_blank')
-      onClose()
+      // Paid - redirect to Stripe Checkout
+      setIsGenerating(true)
+      try {
+        const response = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount, lawyerName }),
+        })
+        const data = await response.json()
+
+        if (data.url) {
+          window.location.href = data.url
+        } else {
+          throw new Error(data.error || 'Błąd płatności')
+        }
+      } catch (error) {
+        console.error('Payment error:', error)
+        alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.')
+        setIsGenerating(false)
+      }
     }
   }
 
