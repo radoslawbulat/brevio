@@ -233,6 +233,13 @@
   font-weight: 500;
 }
 
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .heroDecoration {
   position: absolute;
   bottom: 4rem;
@@ -358,6 +365,39 @@
   font-size: 0.95rem;
 }
 
+.serviceCard {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.serviceLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.serviceLink svg {
+  transition: transform 0.3s ease;
+}
+
+.serviceCard:hover .serviceLink {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.serviceCard:hover .serviceLink svg {
+  transform: translateX(4px);
+}
+
 /* About Section */
 .about {
   padding: 8rem 0;
@@ -387,6 +427,13 @@
   font-size: 6rem;
   color: white;
   font-weight: 500;
+}
+
+.aboutImage {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .aboutFrame {
@@ -602,6 +649,107 @@
 
 .formSubmit:hover {
   background: var(--color-accent);
+}
+
+/* Map */
+.mapWrapper {
+  position: relative;
+  height: 450px;
+  margin-top: 4rem;
+  overflow: hidden;
+}
+
+.mapWrapper iframe {
+  filter: grayscale(100%) contrast(1.1) sepia(20%);
+  opacity: 0.9;
+  transition: all 0.4s ease;
+}
+
+.mapWrapper:hover iframe {
+  filter: grayscale(50%) contrast(1.05) sepia(10%);
+  opacity: 1;
+}
+
+.mapOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--color-paper) 0%,
+    transparent 15%,
+    transparent 85%,
+    var(--color-paper) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mapPin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.mapPinInner {
+  width: 56px;
+  height: 56px;
+  background: var(--color-ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.mapPinInner::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid var(--color-ink);
+}
+
+.mapPinInner svg {
+  stroke: var(--color-accent-light);
+  width: 28px;
+  height: 28px;
+}
+
+.mapPinPulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: mapPulse 2s ease-out infinite;
+}
+
+@keyframes mapPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
 }
 
 /* Footer */

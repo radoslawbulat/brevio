@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styles from './TemplateElegant.module.css'
+import { SERVICES } from '../../../data/services'
 
 export default function TemplateElegant({ lawyer }) {
+  const { lawyerSlug } = useParams()
+
   useEffect(() => {
     // Reveal on scroll
     const reveals = document.querySelectorAll(`.${styles.reveal}`)
@@ -67,9 +71,7 @@ export default function TemplateElegant({ lawyer }) {
         </div>
         <div className={styles.heroVisual}>
           <div className={styles.heroImageContainer}>
-            <div className={styles.heroImagePlaceholder}>
-              <span>{initials}</span>
-            </div>
+            <img src="/hero.jpg" alt={lawyer.name} className={styles.heroImage} />
           </div>
           <div className={styles.heroDecoration}></div>
         </div>
@@ -89,19 +91,22 @@ export default function TemplateElegant({ lawyer }) {
         </div>
 
         <div className={styles.servicesGrid}>
-          {[
-            { num: '01', title: 'Prawo cywilne', desc: 'Sprawy majątkowe, umowy, odszkodowania, sprawy spadkowe i windykacja należności.' },
-            { num: '02', title: 'Prawo rodzinne', desc: 'Rozwody, alimenty, podział majątku, władza rodzicielska i kontakty z dziećmi.' },
-            { num: '03', title: 'Prawo gospodarcze', desc: 'Obsługa firm, umowy handlowe, spory między przedsiębiorcami, due diligence.' },
-            { num: '04', title: 'Prawo pracy', desc: 'Reprezentacja pracowników i pracodawców, umowy, zwolnienia, mobbing.' },
-            { num: '05', title: 'Prawo karne', desc: 'Obrona w sprawach karnych, reprezentacja pokrzywdzonych, sprawy wykroczeniowe.' },
-            { num: '06', title: 'Nieruchomości', desc: 'Transakcje, najem, służebności, postępowania wieczystoksięgowe.' },
-          ].map((service) => (
-            <div key={service.num} className={`${styles.serviceCard} ${styles.reveal}`}>
+          {SERVICES.map((service) => (
+            <Link
+              key={service.id}
+              to={`/${lawyerSlug}/uslugi/${service.id}?t=elegant`}
+              className={`${styles.serviceCard} ${styles.reveal}`}
+            >
               <span className={styles.serviceNumber}>{service.num}</span>
               <h3 className={styles.serviceTitle}>{service.title}</h3>
-              <p className={styles.serviceDescription}>{service.desc}</p>
-            </div>
+              <p className={styles.serviceDescription}>{service.shortDesc}</p>
+              <span className={styles.serviceLink}>
+                Dowiedz się więcej
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -110,9 +115,7 @@ export default function TemplateElegant({ lawyer }) {
       <section className={styles.about} id="omnie">
         <div className={styles.aboutContainer}>
           <div className={`${styles.aboutImageWrapper} ${styles.reveal}`}>
-            <div className={styles.aboutImagePlaceholder}>
-              <span>{initials}</span>
-            </div>
+            <img src="/aboutme.png" alt={lawyer.name} className={styles.aboutImage} />
             <div className={styles.aboutFrame}></div>
           </div>
           <div className={`${styles.aboutContent} ${styles.reveal}`}>
@@ -246,6 +249,30 @@ export default function TemplateElegant({ lawyer }) {
               <button type="submit" className={styles.formSubmit}>Wyślij wiadomość</button>
             </form>
           </div>
+        </div>
+
+        {/* Map */}
+        <div className={`${styles.mapWrapper} ${styles.reveal}`}>
+          <div className={styles.mapOverlay}></div>
+          <div className={styles.mapPin}>
+            <div className={styles.mapPinInner}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div className={styles.mapPinPulse}></div>
+          </div>
+          <iframe
+            title="Lokalizacja kancelarii"
+            src={`https://www.google.com/maps?q=${encodeURIComponent(`${lawyer.address}, ${lawyer.postalCode} ${lawyer.city}, Poland`)}&output=embed&z=15`}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </section>
 
