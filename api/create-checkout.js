@@ -1,8 +1,9 @@
-import Stripe from 'stripe'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+const Stripe = require('stripe')
 
 export default async function handler(req, res) {
+  // Initialize Stripe inside the handler to ensure env vars are loaded
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
   // Only allow POST
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
@@ -60,6 +61,6 @@ export default async function handler(req, res) {
     res.status(200).json({ url: session.url })
   } catch (error) {
     console.error('Stripe error:', error)
-    res.status(500).json({ error: 'Wystąpił błąd podczas tworzenia płatności' })
+    res.status(500).json({ error: 'Wystąpił błąd podczas tworzenia płatności', details: error.message })
   }
 }
