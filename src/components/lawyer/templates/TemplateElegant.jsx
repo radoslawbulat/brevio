@@ -37,7 +37,7 @@ export default function TemplateElegant({ lawyer }) {
   const initials = lawyer.name.split(' ').map(n => n[0]).join('')
   const firstName = lawyer.name.split(' ')[0]
   const isMan = lawyer.gender === 'man'
-  const heroImage = isMan ? '/heroman.png' : '/hero.png'
+  const heroImage = isMan ? '/heroman.png' : '/hero.jpg'
   const aboutImage = isMan ? '/aboutmeman.png' : '/aboutme.png'
 
   return (

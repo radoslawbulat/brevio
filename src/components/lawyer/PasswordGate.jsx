@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './PasswordGate.module.css'
 
-const PASSWORD = '1234'
+const PASSWORD = '2025'
 const STORAGE_KEY = 'brevio_lawyer_access'
 
 export default function PasswordGate({ children }) {
