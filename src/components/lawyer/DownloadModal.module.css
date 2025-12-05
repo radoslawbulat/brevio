@@ -56,6 +56,42 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.authorPhoto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(196, 167, 125, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.authorMessage {
+  margin: 0.75rem 0 0 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.authorMessage a {
+  color: #c4a77d;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.authorMessage a:hover {
+  text-decoration: underline;
+}
+
 .title {
   font-size: 1.5rem;
   font-weight: 700;

@@ -77,9 +77,15 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
           </svg>
         </button>
 
+        <div className={styles.author}>
+          <img src="/radek.jpeg" alt="Radek" className={styles.authorPhoto} />
+          <p className={styles.authorMessage}>
+            Powodzenia z kancelarią! Mam nadzieję, że strona przyniesie wielu klientów. — <a href="https://www.linkedin.com/in/radoslawbulat/" target="_blank" rel="noopener noreferrer">Radosław Bułat</a>
+          </p>
+        </div>
         <h2 className={styles.title}>Pobierz swoją stronę</h2>
         <p className={styles.subtitle}>
-          Wybierz kwotę, którą chcesz zapłacić. Możesz pobrać za darmo lub wspomóc nasz projekt.
+          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją.
         </p>
 
         <div className={styles.sliderSection}>
