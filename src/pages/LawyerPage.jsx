@@ -26,7 +26,7 @@ function LawyerPage() {
   }
 
   return (
-    <PasswordGate>
+    <PasswordGate lawyerSlug={lawyerSlug}>
       <TemplateElegant lawyer={lawyer} />
       <CustomizerBar lawyerName={lawyer.name} />
     </PasswordGate>

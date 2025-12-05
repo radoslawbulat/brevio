@@ -4,7 +4,7 @@ import styles from './PasswordGate.module.css'
 const PASSWORD = '2025'
 const STORAGE_KEY = 'brevio_lawyer_access'
 
-export default function PasswordGate({ children }) {
+export default function PasswordGate({ children, lawyerSlug }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
@@ -20,7 +20,18 @@ export default function PasswordGate({ children }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (password === PASSWORD) {
+    const isCorrect = password === PASSWORD
+
+    // Track password attempt in Google Analytics
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'password_attempt', {
+        event_category: 'lawyer_preview',
+        event_label: lawyerSlug || window.location.pathname,
+        success: isCorrect,
+      })
+    }
+
+    if (isCorrect) {
       sessionStorage.setItem(STORAGE_KEY, 'granted')
       setIsAuthenticated(true)
       setError(false)
