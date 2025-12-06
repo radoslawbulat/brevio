@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from './PasswordGate.module.css'
+import { trackEvent, EVENTS } from '../../utils/analytics'
 
 const PASSWORD = '2025'
 const STORAGE_KEY = 'brevio_lawyer_access'
@@ -14,27 +15,39 @@ export default function PasswordGate({ children, lawyerSlug }) {
     const stored = sessionStorage.getItem(STORAGE_KEY)
     if (stored === 'granted') {
       setIsAuthenticated(true)
+      // Track successful landing view (returning visitor)
+      trackEvent(EVENTS.LANDING_VIEW, {
+        lawyer_slug: lawyerSlug,
+        returning: true,
+      })
+    } else {
+      // Track password page view
+      trackEvent(EVENTS.PASSWORD_PAGE_VIEW, {
+        lawyer_slug: lawyerSlug,
+      })
     }
     setIsLoading(false)
-  }, [])
+  }, [lawyerSlug])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const isCorrect = password === PASSWORD
 
-    // Track password attempt in Google Analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'password_attempt', {
-        event_category: 'lawyer_preview',
-        event_label: lawyerSlug || window.location.pathname,
-        success: isCorrect,
-      })
-    }
+    // Track password attempt
+    trackEvent(EVENTS.PASSWORD_ATTEMPT, {
+      lawyer_slug: lawyerSlug,
+      success: isCorrect,
+    })
 
     if (isCorrect) {
       sessionStorage.setItem(STORAGE_KEY, 'granted')
       setIsAuthenticated(true)
       setError(false)
+      // Track successful landing view (first time visitor)
+      trackEvent(EVENTS.LANDING_VIEW, {
+        lawyer_slug: lawyerSlug,
+        returning: false,
+      })
     } else {
       setError(true)
       setPassword('')

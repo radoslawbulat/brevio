@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './DownloadModal.module.css'
 import { generateWebsiteZip } from '../../utils/generateWebsite'
+import { trackEvent, EVENTS } from '../../utils/analytics'
 
 const SUGGESTED_AMOUNT = 1999
 
 export default function DownloadModal({ isOpen, onClose, lawyerName }) {
   const [amount, setAmount] = useState(0)
   const [isGenerating, setIsGenerating] = useState(false)
+  const sliderDebounceRef = useRef(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -25,9 +27,37 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
     }
   }
 
+  const handleSliderChange = (e) => {
+    const newAmount = Number(e.target.value)
+    setAmount(newAmount)
+
+    // Debounce tracking to avoid too many events
+    if (sliderDebounceRef.current) {
+      clearTimeout(sliderDebounceRef.current)
+    }
+    sliderDebounceRef.current = setTimeout(() => {
+      trackEvent(EVENTS.SLIDER_CHANGE, {
+        lawyer_name: lawyerName,
+        amount: newAmount,
+      })
+    }, 500)
+  }
+
+  const handleTierSelect = (tierAmount, tierName) => {
+    setAmount(tierAmount)
+    trackEvent(EVENTS.TIER_SELECT, {
+      lawyer_name: lawyerName,
+      tier_name: tierName,
+      amount: tierAmount,
+    })
+  }
+
   const handleDownload = async () => {
     if (amount === 0) {
       // Free download - generate ZIP
+      trackEvent(EVENTS.FREE_DOWNLOAD, {
+        lawyer_name: lawyerName,
+      })
       setIsGenerating(true)
       try {
         await generateWebsiteZip(lawyerName)
@@ -39,6 +69,10 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
       onClose()
     } else {
       // Paid - redirect to Stripe Checkout
+      trackEvent(EVENTS.PAYMENT_START, {
+        lawyer_name: lawyerName,
+        amount: amount,
+      })
       setIsGenerating(true)
       try {
         const response = await fetch('/api/create-checkout', {
@@ -62,6 +96,9 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
   }
 
   const handleScheduleCall = () => {
+    trackEvent(EVENTS.SCHEDULE_CALL, {
+      lawyer_name: lawyerName,
+    })
     window.open('https://cal.com/vencer/30min', '_blank')
     onClose()
   }
@@ -100,7 +137,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
             max="5000"
             step="50"
             value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
+            onChange={handleSliderChange}
             className={styles.slider}
           />
 
@@ -113,7 +150,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
         <div className={styles.tiers}>
           <button
             className={`${styles.tierBtn} ${amount === 0 ? styles.active : ''}`}
-            onClick={() => setAmount(0)}
+            onClick={() => handleTierSelect(0, 'Darmowe')}
           >
             <span className={styles.tierPrice}>0 zł</span>
             <span className={styles.tierName}>Darmowe</span>
@@ -122,7 +159,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
 
           <button
             className={`${styles.tierBtn} ${styles.suggested} ${amount === SUGGESTED_AMOUNT ? styles.active : ''}`}
-            onClick={() => setAmount(SUGGESTED_AMOUNT)}
+            onClick={() => handleTierSelect(SUGGESTED_AMOUNT, 'Z instalacją')}
           >
             <span className={styles.badge}>Polecane</span>
             <span className={styles.tierPrice}>1999 zł</span>

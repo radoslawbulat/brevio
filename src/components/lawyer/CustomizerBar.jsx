@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './CustomizerBar.module.css'
 import DownloadModal from './DownloadModal'
+import { trackEvent, EVENTS } from '../../utils/analytics'
 
 const HERO_IMAGES = [
   { id: 'hero', name: 'Portret', src: '/hero.jpg' },
@@ -62,6 +63,11 @@ export default function CustomizerBar({ lawyerName }) {
       heroImg.src = heroImage.src
     }
     setActiveHero(heroImage.id)
+    trackEvent(EVENTS.HERO_IMAGE_CHANGE, {
+      lawyer_name: lawyerName,
+      image_id: heroImage.id,
+      image_name: heroImage.name,
+    })
   }
 
   const applyTheme = (theme) => {
@@ -77,10 +83,18 @@ export default function CustomizerBar({ lawyerName }) {
       templatePage.style.setProperty('--color-light', theme.colors.light)
     }
     setActiveTheme(theme.id)
+    trackEvent(EVENTS.THEME_CHANGE, {
+      lawyer_name: lawyerName,
+      theme_id: theme.id,
+      theme_name: theme.name,
+    })
   }
 
   const handleDownload = () => {
     setIsModalOpen(true)
+    trackEvent(EVENTS.DOWNLOAD_CLICK, {
+      lawyer_name: lawyerName,
+    })
   }
 
   return (
