@@ -29,7 +29,7 @@ export function CTA() {
             </Button>
           </div>
           <div className={styles.contact}>
-            <p>lub zadzwoń: <a href="tel:+48603432355">+48 603 432 355</a></p>
+            <p>lub napisz: <a href="mailto:radek@brevio.pl">radek@brevio.pl</a></p>
           </div>
           <p className={styles.note}>
             Odpowiadamy w ciągu 24h. Jeśli nie odpiszemy — znaczy że jesteśmy pełni i nie możemy przyjąć więcej klientów.
