@@ -3,10 +3,10 @@ import styles from './DownloadModal.module.css'
 import { generateWebsiteZip } from '../../utils/generateWebsite'
 import { trackEvent, EVENTS } from '../../utils/analytics'
 
-const SUGGESTED_AMOUNT = 1999
+const SUGGESTED_AMOUNT = 999
 
 export default function DownloadModal({ isOpen, onClose, lawyerName }) {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(SUGGESTED_AMOUNT)
   const [isGenerating, setIsGenerating] = useState(false)
   const sliderDebounceRef = useRef(null)
 
@@ -162,9 +162,9 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
             onClick={() => handleTierSelect(SUGGESTED_AMOUNT, 'Z instalacją')}
           >
             <span className={styles.badge}>Polecane</span>
-            <span className={styles.tierPrice}>1999 zł</span>
+            <span className={styles.tierPrice}>999 zł</span>
             <span className={styles.tierName}>Z instalacją</span>
-            <span className={styles.tierDesc}>Instalacja + hosting + domena</span>
+            <span className={styles.tierDesc}>Instalacja + Zmiana treści</span>
           </button>
         </div>
 
