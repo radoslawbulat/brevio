@@ -129,6 +129,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
           <div className={styles.amountDisplay}>
             <span className={styles.currency}>PLN</span>
             <span className={styles.amount}>{amount}</span>
+            {amount > 0 && <span className={styles.amountBrutto}>brutto</span>}
           </div>
 
           <input
