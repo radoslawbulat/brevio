@@ -122,7 +122,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
         </div>
         <h2 className={styles.title}>Pobierz swoją stronę</h2>
         <p className={styles.subtitle}>
-          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją. Oferta ważna do 7 grudnia 2025.
+          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją. Oferta ważna do 8 grudnia 2025.
         </p>
 
         <div className={styles.sliderSection}>
@@ -162,7 +162,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
             onClick={() => handleTierSelect(SUGGESTED_AMOUNT, 'Z instalacją')}
           >
             <span className={styles.badge}>Polecane</span>
-            <span className={styles.tierPrice}>999 zł</span>
+            <span className={styles.tierPrice}><span className={styles.oldPrice}>2999 zł</span> 999 zł <span className={styles.brutto}>brutto</span></span>
             <span className={styles.tierName}>Z instalacją</span>
             <span className={styles.tierDesc}>Instalacja + Zmiana treści</span>
           </button>

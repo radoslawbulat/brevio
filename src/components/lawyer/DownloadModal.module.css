@@ -226,6 +226,21 @@
   font-weight: 700;
 }
 
+.oldPrice {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: line-through;
+  margin-right: 0.35rem;
+}
+
+.brutto {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: lowercase;
+}
+
 .tierName {
   font-size: 0.85rem;
   font-weight: 600;
