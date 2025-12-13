@@ -197,7 +197,7 @@ export default function CustomizerBar({ lawyerName }) {
           <div className={styles.cta}>
             <div className={styles.ctaContent}>
               <span className={styles.ctaText}>Chcesz tą stronę?</span>
-              <span className={styles.ctaFomo}>Oferta do 8 grudnia</span>
+              <span className={styles.ctaFomo}>Oferta do 13 grudnia</span>
             </div>
             <button className={styles.ctaBtn} onClick={handleDownload}>
               Pobierz

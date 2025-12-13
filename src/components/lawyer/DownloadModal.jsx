@@ -122,7 +122,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
         </div>
         <h2 className={styles.title}>Pobierz swoją stronę</h2>
         <p className={styles.subtitle}>
-          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją. Oferta ważna do 8 grudnia 2025.
+          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją. Oferta ważna do 13 grudnia 2025.
         </p>
 
         <div className={styles.sliderSection}>
