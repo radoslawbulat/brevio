@@ -197,10 +197,10 @@ export default function CustomizerBar({ lawyerName }) {
           <div className={styles.cta}>
             <div className={styles.ctaContent}>
               <span className={styles.ctaText}>Chcesz tą stronę?</span>
-              <span className={styles.ctaFomo}>Oferta do 13 grudnia</span>
+              <span className={styles.ctaFomo}>Oferta do 19 grudnia</span>
             </div>
             <button className={styles.ctaBtn} onClick={handleDownload}>
-              Pobierz
+              Zamów teraz
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>

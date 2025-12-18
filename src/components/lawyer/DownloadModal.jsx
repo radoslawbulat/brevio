@@ -1,14 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './DownloadModal.module.css'
-import { generateWebsiteZip } from '../../utils/generateWebsite'
 import { trackEvent, EVENTS } from '../../utils/analytics'
 
 const SUGGESTED_AMOUNT = 999
 
 export default function DownloadModal({ isOpen, onClose, lawyerName }) {
-  const [amount, setAmount] = useState(SUGGESTED_AMOUNT)
+  const amount = SUGGESTED_AMOUNT // Fixed at 999 PLN
   const [isGenerating, setIsGenerating] = useState(false)
-  const sliderDebounceRef = useRef(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -27,71 +25,30 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
     }
   }
 
-  const handleSliderChange = (e) => {
-    const newAmount = Number(e.target.value)
-    setAmount(newAmount)
-
-    // Debounce tracking to avoid too many events
-    if (sliderDebounceRef.current) {
-      clearTimeout(sliderDebounceRef.current)
-    }
-    sliderDebounceRef.current = setTimeout(() => {
-      trackEvent(EVENTS.SLIDER_CHANGE, {
-        lawyer_name: lawyerName,
-        amount: newAmount,
-      })
-    }, 500)
-  }
-
-  const handleTierSelect = (tierAmount, tierName) => {
-    setAmount(tierAmount)
-    trackEvent(EVENTS.TIER_SELECT, {
-      lawyer_name: lawyerName,
-      tier_name: tierName,
-      amount: tierAmount,
-    })
-  }
-
   const handleDownload = async () => {
-    if (amount === 0) {
-      // Free download - generate ZIP
-      trackEvent(EVENTS.FREE_DOWNLOAD, {
-        lawyer_name: lawyerName,
+    // Paid - redirect to Stripe Checkout for 999 PLN
+    trackEvent(EVENTS.PAYMENT_START, {
+      lawyer_name: lawyerName,
+      amount: amount,
+    })
+    setIsGenerating(true)
+    try {
+      const response = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, lawyerName, returnUrl: window.location.pathname }),
       })
-      setIsGenerating(true)
-      try {
-        await generateWebsiteZip(lawyerName)
-      } catch (error) {
-        console.error('Error generating website:', error)
-        alert('Wystąpił błąd podczas generowania strony. Spróbuj ponownie.')
-      }
-      setIsGenerating(false)
-      onClose()
-    } else {
-      // Paid - redirect to Stripe Checkout
-      trackEvent(EVENTS.PAYMENT_START, {
-        lawyer_name: lawyerName,
-        amount: amount,
-      })
-      setIsGenerating(true)
-      try {
-        const response = await fetch('/api/create-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ amount, lawyerName, returnUrl: window.location.pathname }),
-        })
-        const data = await response.json()
+      const data = await response.json()
 
-        if (data.url) {
-          window.location.href = data.url
-        } else {
-          throw new Error(data.error || 'Błąd płatności')
-        }
-      } catch (error) {
-        console.error('Payment error:', error)
-        alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.')
-        setIsGenerating(false)
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        throw new Error(data.error || 'Błąd płatności')
       }
+    } catch (error) {
+      console.error('Payment error:', error)
+      alert('Wystąpił błąd podczas tworzenia płatności. Spróbuj ponownie.')
+      setIsGenerating(false)
     }
   }
 
@@ -120,47 +77,14 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
             Powodzenia z kancelarią! Mam nadzieję, że strona przyniesie wielu klientów. — <a href="https://www.linkedin.com/in/radoslawbulat/" target="_blank" rel="noopener noreferrer">Radosław Bułat</a>
           </p>
         </div>
-        <h2 className={styles.title}>Pobierz swoją stronę</h2>
+        <h2 className={styles.title}>Zamów swoją stronę</h2>
         <p className={styles.subtitle}>
-          Zapłać ile chcesz. Darmowe pobieranie lub wsparcie z pełną instalacją. Oferta ważna do 13 grudnia 2025.
+          Skorzystaj z promocyjnej oferty. Pełna instalacja i zmiana treści. Oferta ważna do 19 grudnia 2025.
         </p>
 
-        <div className={styles.sliderSection}>
-          <div className={styles.amountDisplay}>
-            <span className={styles.currency}>PLN</span>
-            <span className={styles.amount}>{amount}</span>
-            {amount > 0 && <span className={styles.amountBrutto}>brutto</span>}
-          </div>
-
-          <input
-            type="range"
-            min="0"
-            max="5000"
-            step="50"
-            value={amount}
-            onChange={handleSliderChange}
-            className={styles.slider}
-          />
-
-          <div className={styles.sliderLabels}>
-            <span>0 zł (darmowe)</span>
-            <span>5000 zł</span>
-          </div>
-        </div>
-
-        <div className={styles.tiers}>
+        <div className={styles.centeredTier}>
           <button
-            className={`${styles.tierBtn} ${amount === 0 ? styles.active : ''}`}
-            onClick={() => handleTierSelect(0, 'Darmowe')}
-          >
-            <span className={styles.tierPrice}>0 zł</span>
-            <span className={styles.tierName}>Darmowe</span>
-            <span className={styles.tierDesc}>Pobierz pliki strony</span>
-          </button>
-
-          <button
-            className={`${styles.tierBtn} ${styles.suggested} ${amount === SUGGESTED_AMOUNT ? styles.active : ''}`}
-            onClick={() => handleTierSelect(SUGGESTED_AMOUNT, 'Z instalacją')}
+            className={`${styles.tierBtn} ${styles.suggested} ${styles.active}`}
           >
             <span className={styles.badge}>Polecane</span>
             <span className={styles.tierPrice}><span className={styles.oldPrice}>2999 zł</span> 999 zł <span className={styles.brutto}>brutto</span></span>
@@ -174,18 +98,7 @@ export default function DownloadModal({ isOpen, onClose, lawyerName }) {
           onClick={handleDownload}
           disabled={isGenerating}
         >
-          {isGenerating ? (
-            'Generowanie...'
-          ) : amount === 0 ? (
-            <>
-              Pobierz za darmo
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-              </svg>
-            </>
-          ) : (
-            `Zapłać ${amount} zł`
-          )}
+          {isGenerating ? 'Generowanie...' : 'Zamów za 999 zł'}
         </button>
 
         <div className={styles.divider}>
