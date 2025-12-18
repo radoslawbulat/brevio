@@ -19,13 +19,13 @@ export default async function handler(req, res) {
     }
 
     // Determine product description based on amount
-    const isFullService = amount >= 1999
+    const isFullService = amount >= 999 // Promotional full service at 999 PLN
     const productName = isFullService
       ? `Strona dla ${lawyerName} + Instalacja`
       : `Wsparcie Brevio - Strona dla ${lawyerName}`
 
     const productDescription = isFullService
-      ? 'Strona internetowa + profesjonalna instalacja + hosting + domena + certyfikat SSL'
+      ? 'Strona internetowa + profesjonalna instalacja + zmiana treści (kopia, zdjęcia) + hosting'
       : 'Dziękujemy za wsparcie projektu Brevio! Otrzymasz pliki strony do samodzielnej instalacji.'
 
     // Create Stripe Checkout Session
