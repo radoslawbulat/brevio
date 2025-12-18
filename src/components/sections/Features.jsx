@@ -17,8 +17,8 @@ const features = [
   },
   {
     id: 'seo',
-    title: 'SEO i strona',
-    description: 'Optymalizacja techniczna, szybkość, struktura. Pozycjonowanie na frazy lokalne. Widoczność tam gdzie klienci szukają dziś i będą szukać jutro — w AI Overview, ChatGPT, Perplexity.',
+    title: 'SEO + GEO (optymalizacja pod AI)',
+    description: 'Klasyczne pozycjonowanie to za mało. Optymalizujemy Twoją stronę pod Google, ale też pod ChatGPT, Perplexity i Google AI Overview. Kiedy klient wpisze "jak podzielić majątek po rozwodzie", Twoja kancelaria może być źródłem odpowiedzi.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8"/>
@@ -29,7 +29,7 @@ const features = [
   {
     id: 'gmb',
     title: 'Google Maps',
-    description: 'Twój profil na szczycie wyników lokalnych. Optymalizacja wizytówki, zdjęcia, posty, odpowiedzi na opinie. Tam gdzie klienci szukają prawnika "blisko mnie".',
+    description: 'Twój profil na szczycie wyników lokalnych. Optymalizacja wizytówki, zdjęcia, posty, odpowiedzi na opinie. 70% klientów wybiera kancelarię z pierwszej strony wyników lokalnych.',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>

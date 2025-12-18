@@ -102,6 +102,16 @@ export function Pricing() {
           </div>
         </div>
 
+        <div className={`${styles.ethics} ${isVisible ? styles.visible : ''}`}>
+          <div className={styles.ethicsBadge}>
+            <span className={styles.ethicsCheck}>✓</span>
+            <span className={styles.ethicsText}>W pełni zgodne z Kodeksem Etyki Adwokackiej</span>
+          </div>
+          <p className={styles.ethicsDesc}>
+            Żadnych agresywnych haseł ani gwarancji wyników. Budujemy autorytet przez edukację.
+          </p>
+        </div>
+
         <div className={`${styles.faq} ${isVisible ? styles.visible : ''}`}>
           <h3 className={styles.faqTitle}>Często zadawane pytania</h3>
           <div className={styles.faqGrid}>
@@ -112,6 +122,10 @@ export function Pricing() {
             <div className={styles.faqItem}>
               <h4>Kiedy zobaczę efekty?</h4>
               <p>Pierwsze wzrosty widoczności po 4-6 tygodniach. Znaczący wzrost zapytań po 3-4 miesiącach.</p>
+            </div>
+            <div className={styles.faqItem}>
+              <h4>Czym różnicie się od zwykłej agencji SEO?</h4>
+              <p>Specjalizujemy się wyłącznie w kancelariach prawnych. Znamy branżę, ograniczenia etyczne i specyfikę pozyskiwania klientów w prawie. Poza tym optymalizujemy pod AI (ChatGPT, Perplexity), czego większość agencji jeszcze nie robi.</p>
             </div>
             <div className={styles.faqItem}>
               <h4>Czy pracujecie z konkurencją?</h4>

@@ -1,6 +1,7 @@
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import Hero from '../components/sections/Hero'
+import Problem from '../components/sections/Problem'
 import About from '../components/sections/About'
 import HowItWorks from '../components/sections/HowItWorks'
 import Features from '../components/sections/Features'
@@ -14,6 +15,7 @@ function HomeContent() {
       <Header />
       <main>
         <Hero />
+        <Problem />
         <About />
         <HowItWorks />
         <Features />

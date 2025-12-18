@@ -131,6 +131,16 @@
   background: var(--color-border);
 }
 
+.proofStatement {
+  font-size: 16px;
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 500px;
+}
+
 
 @media (min-width: 800px) {
   .hero {

@@ -30,7 +30,7 @@ export function Footer() {
           <div className={styles.brand}>
             <Logo />
             <p className={styles.tagline}>
-              Marketing dla kancelarii prawnych.<br />
+              Marketing kancelarii prawnych w erze AI.<br />
               Klienci znajdują Ciebie, nie Ty ich.
             </p>
           </div>

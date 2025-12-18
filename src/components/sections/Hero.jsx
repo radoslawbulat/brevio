@@ -22,16 +22,15 @@ export function Hero() {
             Tylko 3 miejsca w grudniu
           </div>
           <h1 className={styles.headline}>
-            Przestań szukać klientów.<br />
-            Niech oni znajdą Ciebie.
+            Bądź widoczny tam, gdzie klienci szukają prawnika
           </h1>
           <p className={styles.subheadline}>
-            Platforma do marketingu kancelarii prawnych. SEO, strona, mapy, treści, social media.
-            <strong> Zgodna z zasadami etyki zawodowej.</strong>
+            W Google, mapach, ChatGPT i Perplexity. Klasyczne SEO to za mało.
+            Optymalizujemy Twoją kancelarię pod wyszukiwarki i AI.
           </p>
           <div className={styles.actions}>
             <Button variant="primary" size="large" onClick={openModal}>
-              Umów demo →
+              Sprawdź dostępność w Twoim mieście →
             </Button>
             <Button variant="ghost" size="large" href="#dla-kogo">
               Co dokładnie robimy?

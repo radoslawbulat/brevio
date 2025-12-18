@@ -11,13 +11,13 @@ export function About() {
         <div className={`${styles.content} ${isVisible ? styles.visible : ''}`}>
           <span className={styles.label}>Czym jest Brevio?</span>
           <h2 className={styles.title}>
-            Platforma marketingowa<br />
-            stworzona dla kancelarii prawnych
+            Marketing kancelarii,<br />
+            który działa w erze AI
           </h2>
           <p className={styles.description}>
-            Brevio to usługa, która łączy SEO, Google Maps, content marketing i social media
-            w jeden pakiet — za stałą miesięczną opłatę. Bez agencyjnego bełkotu,
-            bez niejasnych raportów, bez umów na lata.
+            Brevio to usługa, która łączy klasyczne SEO z optymalizacją pod wyszukiwarki AI.
+            Google Maps, content marketing i social media w jeden pakiet — za stałą miesięczną opłatę.
+            Bez agencyjnego bełkotu, bez niejasnych raportów, bez umów na lata.
           </p>
           <div className={styles.charts}>
             {/* Website Visits Chart */}

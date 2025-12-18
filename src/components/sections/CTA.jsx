@@ -20,7 +20,7 @@ export function CTA() {
             Gotowy na więcej klientów?
           </h2>
           <p className={styles.description}>
-            Sprawdź czy Twoje miasto jest jeszcze dostępne. Bezpłatna rozmowa, bez zobowiązań.
+            Sprawdź czy Twoje miasto i specjalizacja są jeszcze dostępne. Bezpłatna rozmowa, bez zobowiązań.
             Dowiesz się czy możemy Ci pomóc.
           </p>
           <div className={styles.actions}>

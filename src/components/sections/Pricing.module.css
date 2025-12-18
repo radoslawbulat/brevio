@@ -252,6 +252,57 @@
   width: 100%;
 }
 
+/* Ethics Section */
+.ethics {
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+
+.ethics.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ethicsBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.ethicsCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #22c55e;
+  color: white;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ethicsText {
+  font-size: 16px;
+  font-weight: var(--font-semibold);
+  color: #166534;
+}
+
+.ethicsDesc {
+  font-size: 14px;
+  color: #15803d;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* FAQ Section */
 .faq {
   margin-top: var(--space-20);
