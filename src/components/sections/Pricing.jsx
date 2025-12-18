@@ -41,7 +41,7 @@ export function Pricing() {
               <p className={styles.planDesc}>Wszystko czego potrzebujesz do zdobywania klientów online</p>
             </div>
             <div className={styles.priceBlock}>
-              <span className={styles.price}>1499 zł</span>
+              <span className={styles.price}>1499 zł brutto</span>
               <span className={styles.period}>/miesiąc</span>
             </div>
             <ul className={styles.features}>
@@ -74,7 +74,7 @@ export function Pricing() {
                 </p>
               </div>
               <div className={styles.sidePrice}>
-                <span className={styles.sidePriceValue}>od 4999 zł</span>
+                <span className={styles.sidePriceValue}>od 4999 zł brutto</span>
                 <span className={styles.sidePriceNote}>jednorazowo</span>
               </div>
               <Button variant="outline" size="medium" onClick={openModal} className={styles.sideButton}>
@@ -92,7 +92,7 @@ export function Pricing() {
                 </p>
               </div>
               <div className={styles.sidePrice}>
-                <span className={styles.sidePriceValue}>od 2999 zł</span>
+                <span className={styles.sidePriceValue}>od 2999 zł brutto</span>
                 <span className={styles.sidePriceNote}>jednorazowo</span>
               </div>
               <Button variant="outline" size="medium" onClick={openModal} className={styles.sideButton}>
