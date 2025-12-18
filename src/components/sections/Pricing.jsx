@@ -42,7 +42,7 @@ export function Pricing() {
             </div>
             <div className={styles.priceBlock}>
               <span className={styles.price}>1499 zł</span>
-              <span className={styles.period}>/miesiąc (cena zawiera VAT)</span>
+              <span className={styles.period}>/miesiąc</span>
             </div>
             <ul className={styles.features}>
               {mainFeatures.map((feature, index) => (
@@ -75,7 +75,7 @@ export function Pricing() {
               </div>
               <div className={styles.sidePrice}>
                 <span className={styles.sidePriceValue}>od 4999 zł</span>
-                <span className={styles.sidePriceNote}>jednorazowo (cena zawiera VAT)</span>
+                <span className={styles.sidePriceNote}>jednorazowo</span>
               </div>
               <Button variant="outline" size="medium" onClick={openModal} className={styles.sideButton}>
                 Zapytaj o stronę
@@ -93,7 +93,7 @@ export function Pricing() {
               </div>
               <div className={styles.sidePrice}>
                 <span className={styles.sidePriceValue}>od 2999 zł</span>
-                <span className={styles.sidePriceNote}>jednorazowo (cena zawiera VAT)</span>
+                <span className={styles.sidePriceNote}>jednorazowo</span>
               </div>
               <Button variant="outline" size="medium" onClick={openModal} className={styles.sideButton}>
                 Zapytaj o branding
